@@ -1,10 +1,10 @@
-package com.example.tennis.Controller;
+package com.example.tennis.controller;
 
-import com.example.tennis.Model.Match;
-import com.example.tennis.Model.Player;
-import com.example.tennis.Repository.MatchRepository;
-import com.example.tennis.Repository.PlayerRepository;
-import com.example.tennis.Service.PlayerService;
+import com.example.tennis.model.Match;
+import com.example.tennis.model.Player;
+import com.example.tennis.repository.MatchRepository;
+import com.example.tennis.repository.PlayerRepository;
+import com.example.tennis.service.PlayerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

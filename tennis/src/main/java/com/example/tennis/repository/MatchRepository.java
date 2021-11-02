@@ -1,6 +1,6 @@
-package com.example.tennis.Repository;
+package com.example.tennis.repository;
 
-import com.example.tennis.Model.Match;
+import com.example.tennis.model.Match;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.util.List;

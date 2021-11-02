@@ -1,8 +1,8 @@
-package com.example.tennis.Service;
+package com.example.tennis.service;
 
-import com.example.tennis.Model.Match;
-import com.example.tennis.Model.Player;
-import com.example.tennis.Repository.MatchRepository;
+import com.example.tennis.model.Match;
+import com.example.tennis.model.Player;
+import com.example.tennis.repository.MatchRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

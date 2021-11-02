@@ -1,7 +1,7 @@
-package com.example.tennis.Controller;
+package com.example.tennis.controller;
 
-import com.example.tennis.Model.Player;
-import com.example.tennis.Repository.PlayerRepository;
+import com.example.tennis.model.Player;
+import com.example.tennis.repository.PlayerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

@@ -1,4 +1,4 @@
-package com.example.tennis.Model;
+package com.example.tennis.model;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
