@@ -33,6 +33,18 @@ public class PlayerService {
         return this.playerRepository.findById(id);
     }
 
+    public Player savePlayer(Player player){
+        return this.playerRepository.save(player);
+    }
+
+    public List<Player> findAllPlayers(){
+        return this.playerRepository.findAll();
+    }
+
+    public List<Player> findPlayersByLevel(int level){
+        return this.playerRepository.findByLevel(level);
+    }
+
     public void updateMatchesPlayedAndWon(Match match){
         String idOfWinner = match.getWinner().getId();
         String idOfLoser = match.getLoser().getId();
