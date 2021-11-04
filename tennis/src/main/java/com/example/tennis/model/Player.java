@@ -2,9 +2,7 @@ package com.example.tennis.model;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.stereotype.Component;
 
-@Component
 @Document(collection = "Players")
 public class Player {
 
