@@ -14,6 +14,7 @@ public class Tournament {
     private String id;
     private String name;
     private int numberOfPlayers;
+    private int maxLevel;
     @DBRef
     private List<Player> players = new ArrayList<>();
     @DBRef
@@ -44,6 +45,14 @@ public class Tournament {
 
     public void setNumberOfPlayers(int numberOfPlayers) {
         this.numberOfPlayers = numberOfPlayers;
+    }
+
+    public int getMaxLevel() {
+        return maxLevel;
+    }
+
+    public void setMaxLevel(int maxLevel) {
+        this.maxLevel = maxLevel;
     }
 
     public List<Player> getPlayers() {

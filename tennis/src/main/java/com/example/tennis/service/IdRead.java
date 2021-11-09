@@ -5,25 +5,25 @@ import org.springframework.stereotype.Component;
 @Component
 public class IdRead {
 
-    private String FirstId;
-    private String SecondId;
+    private String TournamentId;
+    private String PlayerId;
 
     public IdRead() {
     }
 
-    public String getFirstId() {
-        return FirstId;
+    public String getTournamentId() {
+        return TournamentId;
     }
 
-    public void setFirstId(String firstId) {
-        FirstId = firstId;
+    public void setTournamentId(String tournamentId) {
+        TournamentId = tournamentId;
     }
 
-    public String getSecondId() {
-        return SecondId;
+    public String getPlayerId() {
+        return PlayerId;
     }
 
-    public void setSecondId(String secondId) {
-        SecondId = secondId;
+    public void setPlayerId(String playerId) {
+        PlayerId = playerId;
     }
 }

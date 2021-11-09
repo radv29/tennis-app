@@ -29,13 +29,18 @@ public class TournamentService {
         return this.tournamentRepository.findAll();
     }
 
-    public void addPlayerToTournament(String tournamentId, String playerId){
+    public boolean addPlayerToTournament(String tournamentId, String playerId){
         Tournament tournament = tournamentRepository.findById(tournamentId).orElse(null);
         Player player = playerRepository.findById(playerId).orElse(null);
-        List<Player> playersList = tournament.getPlayers();
-        playersList.add(player);
-        tournament.setPlayers(playersList);
-        tournamentRepository.save(tournament);
+        if(player.getLevel()>tournament.getMaxLevel()){
+            return false;
+        }else {
+            List<Player> playersList = tournament.getPlayers();
+            playersList.add(player);
+            tournament.setPlayers(playersList);
+            tournamentRepository.save(tournament);
+            return true;
+        }
     }
 
 }

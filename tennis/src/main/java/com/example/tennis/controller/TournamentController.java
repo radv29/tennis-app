@@ -25,8 +25,8 @@ public class TournamentController {
 
     @PostMapping("/addPlayer")
     public void addPlayer(@RequestBody IdRead idRead){
-        String tournamentId = idRead.getFirstId();
-        String playerId = idRead.getSecondId();
+        String tournamentId = idRead.getTournamentId();
+        String playerId = idRead.getPlayerId();
         this.tournamentService.addPlayerToTournament(tournamentId,playerId);
     }
 
