@@ -1,7 +1,7 @@
 package com.example.tennis.controller;
 
 import com.example.tennis.model.Tournament;
-import com.example.tennis.repository.TournamentRepository;
+import com.example.tennis.service.IdRead;
 import com.example.tennis.service.TournamentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -16,7 +16,7 @@ public class TournamentController {
     private TournamentService tournamentService;
 
     @Autowired
-    private TournamentRepository tournamentRepository;
+    private IdRead idRead;
 
     @PostMapping("/add")
     public void add(@RequestBody Tournament tournament){
@@ -24,14 +24,10 @@ public class TournamentController {
     }
 
     @PostMapping("/addPlayer")
-    public void addPlayer(String tournamentId, String playerId){
-        if(tournamentId == null)
-            System.out.println("dgasg");
-        else{
+    public void addPlayer(@RequestBody IdRead idRead){
+        String tournamentId = idRead.getFirstId();
+        String playerId = idRead.getSecondId();
         this.tournamentService.addPlayerToTournament(tournamentId,playerId);
-        Tournament tournament = tournamentRepository.findById(tournamentId).orElse(null);
-        tournamentRepository.save(tournament);
-        }
     }
 
     @GetMapping("/all")

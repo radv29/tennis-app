@@ -2,10 +2,12 @@ package com.example.tennis.model;
 
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 @Document(collection = "Tournaments")
 public class Tournament {
 
@@ -13,7 +15,7 @@ public class Tournament {
     private String name;
     private int numberOfPlayers;
     @DBRef
-    private List<Player> players = new ArrayList<>(); //Map<Player, Integer> players;
+    private List<Player> players = new ArrayList<>();
     @DBRef
     private List<Match> matches = new ArrayList<>();
 
