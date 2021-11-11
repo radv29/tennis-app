@@ -4,4 +4,7 @@ import com.example.tennis.model.Tournament;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 public interface TournamentRepository extends MongoRepository<Tournament, String> {
+
+    Tournament findByName(String Name);
+
 }

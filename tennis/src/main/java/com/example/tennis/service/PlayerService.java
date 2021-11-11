@@ -2,6 +2,7 @@ package com.example.tennis.service;
 
 import com.example.tennis.model.Match;
 import com.example.tennis.model.Player;
+import com.example.tennis.model.Tournament;
 import com.example.tennis.repository.MatchRepository;
 import com.example.tennis.repository.PlayerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,5 +59,15 @@ public class PlayerService {
         playerRepository.save(winner);
         playerRepository.save(loser);
     }
+
+    public List<Player> orderedPlayers(Tournament tournament) {
+        List<Player> tournamentPlayers = tournament.getPlayers();
+        for(int i=1;i<=tournamentPlayers.size();i++){
+            tournamentPlayers.set(i-1, playerRepository.findByTournamentNumber(i).get(0));
+        }
+
+        return tournamentPlayers;
+    }
+
 
 }

@@ -11,6 +11,7 @@ public class Player {
     private String name;
     private String email;
     private int level;
+    private int tournamentNumber;
     private int matchesPlayed;
     private int matchesWon;
 
@@ -47,6 +48,14 @@ public class Player {
 
     public void setLevel(int level) {
         this.level = level;
+    }
+
+    public int getTournamentNumber() {
+        return tournamentNumber;
+    }
+
+    public void setTournamentNumber(int tournamentNumber) {
+        this.tournamentNumber = tournamentNumber;
     }
 
     public int getMatchesPlayed() {

@@ -15,10 +15,12 @@ public class Tournament {
     private String name;
     private int numberOfPlayers;
     private int maxLevel;
+    List<Integer>numbersOfOrder = new ArrayList<>();
+    private int playersRegistered;
     @DBRef
     private List<Player> players = new ArrayList<>();
     @DBRef
-    private List<Match> matches = new ArrayList<>();
+    private List<TourMatch> matchesOfTournament = new ArrayList<>();
 
     public Tournament() {
     }
@@ -55,7 +57,23 @@ public class Tournament {
         this.maxLevel = maxLevel;
     }
 
-    public List<Player> getPlayers() {
+    public List<Integer> getNumbersOfOrder() {
+        return numbersOfOrder;
+    }
+
+    public void setNumbersOfOrder(List<Integer> numbersOfOrder) {
+        this.numbersOfOrder = numbersOfOrder;
+    }
+
+    public int getPlayersRegistered() {
+        return playersRegistered;
+    }
+
+    public void setPlayersRegistered(int playersRegistered) {
+        this.playersRegistered = playersRegistered;
+    }
+
+        public List<Player> getPlayers() {
         return players;
     }
 
@@ -63,11 +81,11 @@ public class Tournament {
         this.players = players;
     }
 
-    public List<Match> getMatches() {
-        return matches;
+    public List<TourMatch> getMatchesOfTournament() {
+        return matchesOfTournament;
     }
 
-    public void setMatches(List<Match> matches) {
-        this.matches = matches;
+    public void setMatchesOfTournament(List<TourMatch> matches) {
+        this.matchesOfTournament = matchesOfTournament;
     }
 }

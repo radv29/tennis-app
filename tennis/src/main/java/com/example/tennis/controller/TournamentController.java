@@ -18,7 +18,7 @@ public class TournamentController {
     @Autowired
     private IdRead idRead;
 
-    @PostMapping("/add")
+    @PostMapping(value = "/add")
     public void add(@RequestBody Tournament tournament){
         this.tournamentService.saveTournament(tournament);
     }

@@ -9,4 +9,6 @@ public interface PlayerRepository extends MongoRepository<Player, String> {
 
     List<Player> findByLevel(int level);
 
+    List<Player> findByTournamentNumber(int tournamentNumber);
+
 }
