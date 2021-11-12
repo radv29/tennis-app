@@ -3,11 +3,11 @@ package com.example.tennis.service;
 import com.example.tennis.model.Match;
 import com.example.tennis.model.Player;
 import com.example.tennis.model.Tournament;
-import com.example.tennis.repository.MatchRepository;
 import com.example.tennis.repository.PlayerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,18 +15,18 @@ import java.util.Optional;
 public class PlayerService {
 
     @Autowired
-    private MatchRepository matchRepository;
-
-    @Autowired
     private PlayerRepository playerRepository;
 
+    @Autowired
+    private MatchService matchService;
+
     public int setMatchesWonService(Player player){
-        List<Match> matchesWon = matchRepository.findAllByWinner(player.getId());
+        List<Match> matchesWon = matchService.getWonMatches(player);
         return matchesWon.size();
     }
 
     public int setMatchesLostService(Player player){
-        List<Match> matchesPlayed = matchRepository.findAllByLoser(player.getId());
+        List<Match> matchesPlayed = matchService.getLostMatches(player);
         return matchesPlayed.size();
     }
 
@@ -60,12 +60,9 @@ public class PlayerService {
         playerRepository.save(loser);
     }
 
-    public List<Player> orderedPlayers(Tournament tournament) {
+    public List<Player> orderPlayers(Tournament tournament) {
         List<Player> tournamentPlayers = tournament.getPlayers();
-        for(int i=1;i<=tournamentPlayers.size();i++){
-            tournamentPlayers.set(i-1, playerRepository.findByTournamentNumber(i).get(0));
-        }
-
+        Collections.shuffle(tournamentPlayers);
         return tournamentPlayers;
     }
 

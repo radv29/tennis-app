@@ -1,11 +1,13 @@
 package com.example.tennis.service;
 
+import com.example.tennis.model.Player;
 import com.example.tennis.model.TourMatch;
 import com.example.tennis.model.Tournament;
 import com.example.tennis.repository.TourMatchRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -16,6 +18,9 @@ public class TourMatchService {
 
     @Autowired
     private TournamentService tournamentService;
+
+    @Autowired
+    private PlayerService playerService;
 
     public TourMatch saveTourMatch(TourMatch tournamentMatch){
         return this.tourMatchRepository.save(tournamentMatch);
@@ -28,6 +33,20 @@ public class TourMatchService {
     public List<TourMatch> findTourMatchesByTournament(String name){
         Tournament tournaments = tournamentService.findTournamentByName(name);
         return tournaments.getMatchesOfTournament();
+    }
+
+    public List<TourMatch> mainDraw(Tournament tournament){
+        List<TourMatch> tourMatches = new ArrayList<>();
+        List<Player> orderedPlayers = playerService.orderPlayers(tournament);
+        for(int i=0;i<orderedPlayers.size();i=i+2){
+            TourMatch match = new TourMatch();
+            match.setPlayer1(orderedPlayers.get(i));
+            match.setPlayer2(orderedPlayers.get(i+1));
+            match.setTournamentName(tournament.getName());
+            tourMatches.add(match);
+            tourMatchRepository.save(match);
+        }
+        return tourMatches;
     }
 
 }

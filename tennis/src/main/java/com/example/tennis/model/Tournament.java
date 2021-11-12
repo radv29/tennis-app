@@ -13,9 +13,8 @@ public class Tournament {
 
     private String id;
     private String name;
-    private int numberOfPlayers;
+    private int maxPlayers;
     private int maxLevel;
-    List<Integer>numbersOfOrder = new ArrayList<>();
     private int playersRegistered;
     @DBRef
     private List<Player> players = new ArrayList<>();
@@ -41,12 +40,12 @@ public class Tournament {
         this.name = name;
     }
 
-    public int getNumberOfPlayers() {
-        return numberOfPlayers;
+    public int getMaxPlayers() {
+        return maxPlayers;
     }
 
-    public void setNumberOfPlayers(int numberOfPlayers) {
-        this.numberOfPlayers = numberOfPlayers;
+    public void setMaxPlayers(int maxPlayers) {
+        this.maxPlayers = maxPlayers;
     }
 
     public int getMaxLevel() {
@@ -55,14 +54,6 @@ public class Tournament {
 
     public void setMaxLevel(int maxLevel) {
         this.maxLevel = maxLevel;
-    }
-
-    public List<Integer> getNumbersOfOrder() {
-        return numbersOfOrder;
-    }
-
-    public void setNumbersOfOrder(List<Integer> numbersOfOrder) {
-        this.numbersOfOrder = numbersOfOrder;
     }
 
     public int getPlayersRegistered() {
