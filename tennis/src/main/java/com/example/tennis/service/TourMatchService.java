@@ -36,17 +36,72 @@ public class TourMatchService {
     }
 
     public List<TourMatch> mainDraw(Tournament tournament){
+
         List<TourMatch> tourMatches = new ArrayList<>();
         List<Player> orderedPlayers = playerService.orderPlayers(tournament);
+
         for(int i=0;i<orderedPlayers.size();i=i+2){
+
             TourMatch match = new TourMatch();
             match.setPlayer1(orderedPlayers.get(i));
             match.setPlayer2(orderedPlayers.get(i+1));
-            match.setTournamentName(tournament.getName());
+            match.setTournament(tournament.getName());
+            match.setStage("1st Round");
+            match.setDrawn(false);
             tourMatches.add(match);
             tourMatchRepository.save(match);
+
         }
         return tourMatches;
+    }
+
+    public boolean updateMatchWinner(String tourMatchId, int playerNumber, int firstPlayersScore, int secondPlayersScore) {
+
+        TourMatch tourMatch = tourMatchRepository.findById(tourMatchId).orElse(null);
+
+        tourMatch.setPlayer1score(firstPlayersScore);
+        tourMatch.setPlayer2score(secondPlayersScore);
+        tourMatch.setTournament(tourMatch.getTournament());
+
+        if (playerNumber == 1) {
+            tourMatch.setWinner(tourMatch.getPlayer1());
+            if(firstPlayersScore<=secondPlayersScore){
+                return false;
+            }
+        } else {
+            tourMatch.setWinner(tourMatch.getPlayer2());
+            if(secondPlayersScore<=firstPlayersScore){
+                return false;
+            }
+        }
+        tourMatchRepository.save(tourMatch);
+        return true;
+    }
+
+    public void drawMatches(Tournament tournament){
+
+        List<TourMatch> tourMatches = tournament.getMatchesOfTournament();
+        int n = tourMatches.size();
+
+        for(int i=0; i<n; i=i+2) {
+
+            if(!tourMatches.get(i).isDrawn()) {
+
+                TourMatch match = new TourMatch();
+                match.setPlayer1(tourMatches.get(i).getWinner());
+                match.setPlayer2(tourMatches.get(i + 1).getWinner());
+                tourMatches.add(match);
+                tourMatchRepository.save(match);
+            }
+        }
+
+        for(int i=0;i<n;i++){
+            tourMatches.get(i).setDrawn(true);
+            tourMatchRepository.save(tourMatches.get(i));
+        }
+
+        tournament.setMatchesOfTournament(tourMatches);
+        tournamentService.saveTournament(tournament);
     }
 
 }

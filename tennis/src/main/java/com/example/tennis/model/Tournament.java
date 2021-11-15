@@ -64,7 +64,7 @@ public class Tournament {
         this.playersRegistered = playersRegistered;
     }
 
-        public List<Player> getPlayers() {
+    public List<Player> getPlayers() {
         return players;
     }
 

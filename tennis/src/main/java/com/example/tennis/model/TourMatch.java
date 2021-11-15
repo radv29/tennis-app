@@ -14,7 +14,8 @@ public class TourMatch {
     private int player1score;
     private int player2score;
     private String stage;
-    private String tournamentName;
+    private boolean drawn;
+    private String tournament;
 
     public TourMatch() {
     }
@@ -75,11 +76,19 @@ public class TourMatch {
         this.stage = stage;
     }
 
-    public String getTournamentName() {
-        return tournamentName;
+    public boolean isDrawn() {
+        return drawn;
     }
 
-    public void setTournamentName(String tournamentName) {
-        this.tournamentName = tournamentName;
+    public void setDrawn(boolean drawn) {
+        this.drawn = drawn;
+    }
+
+    public String getTournament() {
+        return tournament;
+    }
+
+    public void setTournament(String tournament) {
+        this.tournament = tournament;
     }
 }
