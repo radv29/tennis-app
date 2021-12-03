@@ -1,8 +1,7 @@
 package com.example.tennis.controller;
 
-import com.example.tennis.model.TourMatch;
+import com.example.tennis.dto.WinnerDTO;
 import com.example.tennis.repository.TournamentRepository;
-import com.example.tennis.service.IdRead2;
 import com.example.tennis.service.TourMatchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -17,14 +16,14 @@ public class TourMatchController {
     @Autowired
     private TournamentRepository tournamentRepository;
 
-    @PostMapping("/add")
-    public void add(@RequestBody TourMatch tourMatch){
-        this.tourMatchService.saveTourMatch(tourMatch);
-    }
+//    @PostMapping("/add")
+//    public void add(@RequestBody TourMatch tourMatch){
+//        this.tourMatchService.saveTourMatch(tourMatch);
+//    }
 
     @PostMapping("/updateWinner")
-    public void updateWinner(@RequestBody IdRead2 idRead2){
-        tourMatchService.updateMatchWinner(idRead2.getTourMatchId(), idRead2.getPlayerNumber(), idRead2.getFirstPlayersScore(), idRead2.getSecondPlayersScore());
+    public void updateWinner(@RequestBody WinnerDTO winnerDTO){
+        tourMatchService.updateMatchWinner(winnerDTO.getTourMatchId(), winnerDTO.getPlayerNumber(), winnerDTO.getFirstPlayersScore(), winnerDTO.getSecondPlayersScore());
     }
 
     @PostMapping("/drawPlayers/{tournamentId}")

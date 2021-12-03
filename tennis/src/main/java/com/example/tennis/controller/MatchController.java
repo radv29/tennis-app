@@ -1,5 +1,7 @@
 package com.example.tennis.controller;
 
+import com.example.tennis.dto.MatchDTO;
+import com.example.tennis.mapper.MatchMapper;
 import com.example.tennis.model.Match;
 import com.example.tennis.service.MatchService;
 import com.example.tennis.service.PlayerService;
@@ -16,18 +18,22 @@ public class MatchController {
     private MatchService matchService;
 
     @Autowired
+    private MatchMapper matchMapper;
+
+    @Autowired
     private PlayerService playerService;
 
     @PostMapping("/add")
-    public void addMatch(@RequestBody Match match){
+    public void addMatch(@RequestBody MatchDTO matchDTO){
+        Match match = matchMapper.DTOToModel(matchDTO);
         this.matchService.saveMatch(match);
 
         this.playerService.updateMatchesPlayedAndWon(match);
     }
 
     @GetMapping("/all")
-    public List<Match> getMatches(){
-        return this.matchService.findAllMatches();
+    public List<MatchDTO> getMatches(){
+        return matchMapper.matchesToMatchDTOs(this.matchService.findAllMatches());
     }
 
 }

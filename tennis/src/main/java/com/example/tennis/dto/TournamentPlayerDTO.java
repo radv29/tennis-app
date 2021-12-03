@@ -1,14 +1,11 @@
-package com.example.tennis.service;
+package com.example.tennis.dto;
 
-import org.springframework.stereotype.Component;
-
-@Component
-public class IdRead {
+public class TournamentPlayerDTO {
 
     private String TournamentId;
     private String PlayerId;
 
-    public IdRead() {
+    public TournamentPlayerDTO() {
     }
 
     public String getTournamentId() {
