@@ -7,11 +7,15 @@ import com.example.tennis.mapper.PlayerMapper;
 import com.example.tennis.model.Player;
 import com.example.tennis.service.PlayerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
-@RestController
+@Controller
 @RequestMapping("/players")
 public class PlayerController {
 
@@ -25,18 +29,39 @@ public class PlayerController {
     private PlayerMapper playerMapper;
 
     @PostMapping("/add")
-    public void add(@RequestBody PlayerCreationDTO playerCreationDTO){
+    public String add(@ModelAttribute("player") PlayerCreationDTO playerCreationDTO, BindingResult bindingResult){
         Player player = playerCreationMapper.DTOToModel(playerCreationDTO);
         this.playerService.savePlayer(player);
+        return "players";
+    }
+
+    @GetMapping("/add")
+    public String addView(Model model){
+        model.addAttribute("player", new PlayerCreationDTO());
+        return "addPlayer";
     }
 
     @GetMapping("/all")
-    public List<PlayerDTO> getPlayers(){
-        return playerMapper.playersToPlayerDTOs(this.playerService.findAllPlayers());
+    public String getPlayers(Model model){
+        List<PlayerDTO> playersList = new ArrayList<>();
+        playersList = playerMapper.playersToPlayerDTOs(this.playerService.findAllPlayers());
+        model.addAttribute("players", playersList);
+        return "players";
     }
 
     @GetMapping("/level{level}")
-    public List<PlayerDTO> getByLevel(@PathVariable("level") int level){
-        return playerMapper.playersToPlayerDTOs(this.playerService.findPlayersByLevel(level));
+    public String getByLevel(@PathVariable("level") int level, Model model){
+        List<PlayerDTO> playersList = new ArrayList<>();
+        playersList = playerMapper.playersToPlayerDTOs(this.playerService.findPlayersByLevel(level));
+        model.addAttribute("players", playersList);
+        return "players";
+    }
+
+    @GetMapping("/{playerId}")
+    public String getPlayer(@PathVariable("playerId") String playerId, Model model){
+        Player player = playerService.findById(playerId).orElse(null);
+        PlayerDTO playerDTO = playerMapper.playerToPlayerDTO(player);
+        model.addAttribute("player", playerDTO);
+        return "playerPage";
     }
 }

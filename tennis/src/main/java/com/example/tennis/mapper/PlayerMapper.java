@@ -9,8 +9,8 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface PlayerMapper {
 
-//    PlayerDTO modelToDTO(Player player);
-//    Player DTOToModel(PlayerDTO playerDTO);
     List<PlayerDTO> playersToPlayerDTOs(List<Player> players);
+    PlayerDTO playerToPlayerDTO(Player player);
+    Player playerDTOToPlayer(PlayerDTO playerDTO);
 
 }

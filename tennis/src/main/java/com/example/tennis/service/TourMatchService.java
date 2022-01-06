@@ -30,6 +30,11 @@ public class TourMatchService {
         return this.tourMatchRepository.findAll();
     }
 
+    public List<TourMatch> findTourMatchesByTournamentId(String tournamentId){
+        Tournament tournament = tournamentService.findTournamentById(tournamentId);
+        return tournament.getMatchesOfTournament();
+    }
+
     public List<TourMatch> findTourMatchesByTournament(String name){
         Tournament tournaments = tournamentService.findTournamentByName(name);
         return tournaments.getMatchesOfTournament();

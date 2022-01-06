@@ -33,6 +33,10 @@ public class TournamentService {
         return this.tournamentRepository.findByName(name);
     }
 
+    public Tournament findTournamentById(String tournamentId){
+        return this.tournamentRepository.findById(tournamentId).orElse(null);
+    }
+
     public boolean addPlayerToTournament(String tournamentId, String playerId){
 
         Tournament tournament = tournamentRepository.findById(tournamentId).orElse(null);

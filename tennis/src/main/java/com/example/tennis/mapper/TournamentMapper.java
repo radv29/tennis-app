@@ -9,8 +9,8 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface TournamentMapper {
 
-//    TournamentDTO modelToDTO(Tournament tournament);
-//    Tournament DTOToModel(TournamentDTO tournamentDTO);
     List<TournamentDTO> tournamentsToTournamentDTOs(List<Tournament> tournaments);
+    TournamentDTO tournamentToTournamentDTO(Tournament tournament);
+    Tournament tournamentDTOToTournament(TournamentDTO tournamentDTO);
 
 }
